@@ -1,0 +1,39 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dkc.mapper.UserMapper">
+
+    <sql id="dd">
+        <if test="list != null">
+            <foreach separator="," open="id in (" close=")"
+                     item="everyId" collection="list">
+                #{everyId}
+            </foreach>
+        </if>
+
+    </sql>
+    <sql id="dd1">
+        <if test="list != null">
+            <foreach collection="list" separator="or" open="(" close=")" item="everyId">
+                id = #{everyId}
+            </foreach>
+        </if>
+    </sql>
+
+    <select id="query"  resultType="com.dkc.po.UserEx">
+           select * from user
+    </select>
+
+    <select id="queryByName" parameterType="com.dkc.bz.UserBz" resultType="com.dkc.po.UserEx">
+        select * from user where username like '%${userEx.username}%'
+    </select>
+
+    <select id="queryGet" parameterType="com.dkc.bz.UserBz" resultType="com.dkc.po.UserEx">
+        select * from user
+        <where>
+            <include refid="dd1"/>
+        </where>
+    </select>
+
+
+</mapper>

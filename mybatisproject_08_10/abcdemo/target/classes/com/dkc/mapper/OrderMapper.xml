@@ -1,0 +1,43 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dkc.mapper.OrderMapper">
+
+    <select id="queryByJoin" resultType="com.dkc.po.OrderEx">
+        select orders.*,
+         user.username,
+         user.address,
+         user.sex
+        from orders,user where orders.user_id = user.id;
+    </select>
+
+    <!--用resultMap来实现1对1操作-->
+    <resultMap id="queryByDd" type="com.dkc.po.Orders">
+        <id property="id" column="id" />
+        <result property="userid" column="user_id"/>
+        <result property="number" column="number"/>
+        <result property="createtime" column="createtime"/>
+        <result property="note" column="note"/>
+        <!--关联表user的信息 1:1-->
+        <!-- 使用association来表是一对一的关系 property:
+            指的是Type当中的属性值 javaType:指的是property当中指定的属性的类型
+            column: 代表关联字段 property: javaType中指定的类型的属性值(和关联字
+            段对应)
+        -->
+        <association property="user" javaType="com.dkc.po.User">
+            <id property="id" column="user_id"/>
+            <result property="name" column="username"/>
+            <result property="sex" column="sex"/>
+            <result property="address" column="address"/>
+        </association>
+    </resultMap>
+
+    <select id="queryInfo" resultMap="queryByDd">
+        select orders.*,
+         user.username as name,
+         user.address,
+         user.sex
+        from orders,user where orders.user_id = user.id;
+    </select>
+
+</mapper>
