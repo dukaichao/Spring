@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>add</title>
+    <style>
+        table{
+            /*表格边框合并*/
+            border-collapse: collapse;
+        }
+    </style>
+    <script>
+        /* $(function () {
+             $("#add").submit(function () {
+                 $.post("",$(this).serialize(),function (data){
+
+                 })
+             })
+         } )*/
+    </script>
+</head>
+<body>
+<table border="1" align="center" style="background-color: burlywood;">
+    <tr>
+        <th colspan="2">请输入要添加的值</th>
+        <th></th>
+    </tr>
+    <tr>
+        <th>username</th>
+        <th><input type="text" id="username" name="username"></th>
+    </tr>
+    <tr>
+        <th>birthday</th>
+        <th><input type="text" id="birthday" name="birthday"></th>
+    </tr>
+    <tr>
+        <th>sex</th>
+        <th><input type="text" id="sex" name="sex"></th>
+    </tr>
+    <tr>
+        <th>address</th>
+        <th><input type="text" id="address" name="address"></th>
+    </tr>
+    <tr>
+        <th colspan="2"><input type="submit" value="添加" id="add" /></th>
+        <th></th>
+    </tr>
+</table>
+</body>
+</html>
